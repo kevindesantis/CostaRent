@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CostaRent | Autonoleggio a Sellia Marina</title>
-  <meta name="description" content="CostaRent: autonoleggio a Sellia Marina con Fiat Panda Hybrid Gruppo A e Lancia Ypsilon Gruppo B. Prenotazione online e pagamento al ritiro.">
+  <meta name="description" content="CostaRent: autonoleggio a Sellia Marina con prenotazione online, disponibilità per gruppo auto e ritiro in sede.">
   <link rel="icon" href="assets/logo_small.png">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -28,20 +28,20 @@
       <div class="container hero-grid">
         <div>
           <span class="pill">Autonoleggio a Sellia Marina</span>
-          <h1>Auto vere, prenotazione semplice, ritiro veloce.</h1>
-          <p>Su CostaRent trovi due Fiat Panda o similare di Gruppo A Hybrid e una Lancia Ypsilon o similare di Gruppo B Benzina. Seleziona le date, vedi il prezzo del periodo e invia la richiesta.</p>
+          <h1>Muoviti senza pensieri, al resto pensiamo noi.</h1>
+          <p>Scegli il gruppo auto, inserisci le date e invia la richiesta in pochi secondi. Il sistema controlla la disponibilità del periodo selezionato e ti mostra subito il prezzo stimato.</p>
           <div class="hero-actions">
             <a class="btn" href="#auto">Guarda le auto</a>
             <a class="btn ghost" href="#prenota">Prenota ora</a>
           </div>
           <div class="ticks">
-            <span>✓ 2 Panda Gruppo A Hybrid</span>
-            <span>✓ 1 Ypsilon Gruppo B</span>
+            <span>✓ Prezzi chiari in base al periodo</span>
+            <span>✓ Verifica disponibilità per gruppo</span>
             <span>✓ Ritiro sempre a Sellia Marina</span>
           </div>
         </div>
         <div class="hero-card">
-          <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Fiat_Panda_%282011%29_front_quarter.jpg" alt="Fiat Panda">
+          <img src="assets/cars/lancia-ypsilon.jpg" alt="Auto CostaRent">
           <div class="hero-price">
             <strong>Prezzo calcolato sulle date</strong>
             <span>Il totale appare in automatico in base al periodo scelto.</span>
@@ -54,7 +54,7 @@
       <div class="section-title">
         <span class="eyebrow">Flotta disponibile</span>
         <h2>Le nostre auto</h2>
-        <p>Qui vedi il modello di riferimento del gruppo. Come nei siti di autonoleggio, il veicolo consegnato può essere il modello indicato o un similare della stessa categoria.</p>
+        <p>Scopri i gruppi disponibili e scegli quello più adatto alle tue esigenze. La disponibilità viene controllata in base alle date selezionate.</p>
       </div>
       <div id="carsGrid" class="cars-grid">
         <div class="loading-card">Caricamento auto...</div>
@@ -75,9 +75,10 @@
         </div>
 
         <form id="bookingForm" class="booking-card">
-          <label>Auto
-            <select id="bookingCar" required></select>
+          <label>Gruppo auto
+            <select id="bookingGroup" required></select>
           </label>
+          <p id="availabilityMessage" class="message info">Seleziona gruppo e date per verificare la disponibilità.</p>
           <div class="two">
             <label>Data ritiro
               <input id="pickupDate" type="date" required>
@@ -117,8 +118,8 @@
         <h2>Tre passaggi e hai finito</h2>
       </div>
       <div class="steps">
-        <article><span>1</span><h3>Scegli l’auto</h3><p>Seleziona gruppo auto e date. Il prezzo viene calcolato sul periodo scelto.</p></article>
-        <article><span>2</span><h3>Invia la richiesta</h3><p>I tuoi dati vengono salvati nel gestionale CostaRent.</p></article>
+        <article><span>1</span><h3>Scegli l’auto</h3><p>Seleziona il gruppo auto e le date del noleggio.</p></article>
+        <article><span>2</span><h3>Invia la richiesta</h3><p>La richiesta viene registrata e collegata a un’auto disponibile del gruppo scelto.</p></article>
         <article><span>3</span><h3>Ti ricontattiamo</h3><p>Dopo la verifica disponibilità confermiamo il noleggio e organizziamo il ritiro.</p></article>
       </div>
     </section>
@@ -129,7 +130,7 @@
         <h2>Domande frequenti</h2>
       </div>
       <details open><summary>La prenotazione è immediata?</summary><p>No. È una richiesta che CostaRent deve confermare.</p></details>
-      <details><summary>Il modello è sempre lo stesso?</summary><p>No. È indicato “o similare” perché può essere assegnata un’auto dello stesso gruppo.</p></details>
+      <details><summary>Il modello è sempre lo stesso?</summary><p>Può essere assegnata una vettura appartenente al gruppo scelto, in base alla disponibilità del periodo.</p></details>
       <details><summary>Dove avviene il ritiro?</summary><p>Ritiro e riconsegna avvengono sempre a Sellia Marina.</p></details>
       <details><summary>Come pago?</summary><p>Paghi al ritiro dopo la conferma della prenotazione.</p></details>
     </section>
