@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CostaRent | Autonoleggio a Sellia Marina</title>
+  <meta name="description" content="CostaRent: autonoleggio a Sellia Marina con Fiat Panda Hybrid Gruppo A e Lancia Ypsilon Gruppo B. Prenotazione online e pagamento al ritiro.">
+  <link rel="icon" href="assets/logo_small.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <nav class="container nav">
+      <a class="brand" href="#top"><img src="assets/logo.png" alt="CostaRent"></a>
+      <button class="menu-btn" id="menuBtn" aria-label="Apri menu">☰</button>
+      <div class="navlinks" id="navlinks">
+        <a href="#auto">Auto</a>
+        <a href="#prenota">Prenota</a>
+        <a href="#come-funziona">Come funziona</a>
+        <a href="#faq">FAQ</a>
+        <a class="btn small ghost" id="waHeader" href="#">WhatsApp</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="pill">Autonoleggio a Sellia Marina</span>
+          <h1>Auto vere, prenotazione semplice, ritiro veloce.</h1>
+          <p>Su CostaRent trovi due Fiat Panda o similare di Gruppo A Hybrid e una Lancia Ypsilon o similare di Gruppo B Benzina. Seleziona le date, vedi il prezzo del periodo e invia la richiesta.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#auto">Guarda le auto</a>
+            <a class="btn ghost" href="#prenota">Prenota ora</a>
+          </div>
+          <div class="ticks">
+            <span>✓ 2 Panda Gruppo A Hybrid</span>
+            <span>✓ 1 Ypsilon Gruppo B</span>
+            <span>✓ Ritiro sempre a Sellia Marina</span>
+          </div>
+        </div>
+        <div class="hero-card">
+          <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Fiat_Panda_%282011%29_front_quarter.jpg" alt="Fiat Panda">
+          <div class="hero-price">
+            <strong>Prezzo calcolato sulle date</strong>
+            <span>Il totale appare in automatico in base al periodo scelto.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="auto" class="section container">
+      <div class="section-title">
+        <span class="eyebrow">Flotta disponibile</span>
+        <h2>Le nostre auto</h2>
+        <p>Qui vedi il modello di riferimento del gruppo. Come nei siti di autonoleggio, il veicolo consegnato può essere il modello indicato o un similare della stessa categoria.</p>
+      </div>
+      <div id="carsGrid" class="cars-grid">
+        <div class="loading-card">Caricamento auto...</div>
+      </div>
+    </section>
+
+    <section id="prenota" class="section booking-section">
+      <div class="container booking-grid">
+        <div class="booking-info">
+          <span class="eyebrow">Prenotazione online</span>
+          <h2>Invia la tua richiesta</h2>
+          <p>La richiesta viene salvata nel gestionale CostaRent. Dopo il controllo disponibilità riceverai la conferma del noleggio.</p>
+          <div class="fixed-box">
+            <small>Ritiro e riconsegna</small>
+            <strong>Sellia Marina</strong>
+            <span>Il punto preciso viene concordato in fase di conferma.</span>
+          </div>
+        </div>
+
+        <form id="bookingForm" class="booking-card">
+          <label>Auto
+            <select id="bookingCar" required></select>
+          </label>
+          <div class="two">
+            <label>Data ritiro
+              <input id="pickupDate" type="date" required>
+            </label>
+            <label>Data riconsegna
+              <input id="returnDate" type="date" required>
+            </label>
+          </div>
+          <div class="two">
+            <label>Nome e cognome
+              <input id="customerName" type="text" required>
+            </label>
+            <label>Telefono
+              <input id="customerPhone" type="tel" required>
+            </label>
+          </div>
+          <label>Email
+            <input id="customerEmail" type="email" required>
+          </label>
+          <label>Note
+            <textarea id="bookingNotes" rows="3" placeholder="Eventuali richieste aggiuntive"></textarea>
+          </label>
+          <div class="quote">
+            <div><small>Totale stimato</small><strong id="quoteTotal">—</strong></div>
+            <div><small>Durata</small><strong id="quoteDays">—</strong></div>
+            <div><small>Cauzione</small><strong id="quoteDeposit">—</strong></div>
+          </div>
+          <button id="bookingSubmit" class="btn full" type="submit">Invia richiesta</button>
+          <p id="bookingMessage" class="message"></p>
+        </form>
+      </div>
+    </section>
+
+    <section id="come-funziona" class="section container">
+      <div class="section-title">
+        <span class="eyebrow">Come funziona</span>
+        <h2>Tre passaggi e hai finito</h2>
+      </div>
+      <div class="steps">
+        <article><span>1</span><h3>Scegli l’auto</h3><p>Seleziona gruppo auto e date. Il prezzo viene calcolato sul periodo scelto.</p></article>
+        <article><span>2</span><h3>Invia la richiesta</h3><p>I tuoi dati vengono salvati nel gestionale CostaRent.</p></article>
+        <article><span>3</span><h3>Ti ricontattiamo</h3><p>Dopo la verifica disponibilità confermiamo il noleggio e organizziamo il ritiro.</p></article>
+      </div>
+    </section>
+
+    <section id="faq" class="section container faq">
+      <div class="section-title">
+        <span class="eyebrow">FAQ</span>
+        <h2>Domande frequenti</h2>
+      </div>
+      <details open><summary>La prenotazione è immediata?</summary><p>No. È una richiesta che CostaRent deve confermare.</p></details>
+      <details><summary>Il modello è sempre lo stesso?</summary><p>No. È indicato “o similare” perché può essere assegnata un’auto dello stesso gruppo.</p></details>
+      <details><summary>Dove avviene il ritiro?</summary><p>Ritiro e riconsegna avvengono sempre a Sellia Marina.</p></details>
+      <details><summary>Come pago?</summary><p>Paghi al ritiro dopo la conferma della prenotazione.</p></details>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <img src="assets/logo.png" alt="CostaRent">
+        <p>Autonoleggio smart a Sellia Marina.</p>
+      </div>
+      <div>
+        <strong>Contatti</strong>
+        <p id="footerPhone">WhatsApp: —</p>
+        <p id="footerEmail">Email: —</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script type="module" src="js/public.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gestionale CostaRent</title>
+  <link rel="icon" href="assets/logo_small.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin-page">
+  <header class="topbar">
+    <nav class="container nav">
+      <a class="brand" href="index.html"><img src="assets/logo.png" alt="CostaRent"></a>
+      <div class="navlinks visible"><button class="btn small ghost" id="logoutBtn">Esci</button></div>
+    </nav>
+  </header>
+  <main class="container admin-main">
+    <section id="loginPanel" class="login-panel">
+      <form id="loginForm" class="login-card">
+        <span class="eyebrow">Gestionale</span>
+        <h2>Accesso admin</h2>
+        <label>Email<input id="loginEmail" type="email" required></label>
+        <label>Password<input id="loginPassword" type="password" required></label>
+        <button class="btn full" type="submit">Entra</button>
+        <p id="loginMessage" class="message"></p>
+      </form>
+    </section>
+    <section id="adminPanel" class="hidden">
+      <div class="admin-head">
+        <div><span class="eyebrow">Dashboard</span><h1>Gestionale CostaRent</h1></div>
+        <button class="btn" id="refreshBtn">Aggiorna</button>
+      </div>
+      <div class="stats">
+        <div><small>Richieste</small><strong id="statRequests">0</strong></div>
+        <div><small>Confermate/In corso</small><strong id="statActive">0</strong></div>
+        <div><small>Auto attive</small><strong id="statCars">0</strong></div>
+        <div><small>Incasso stimato</small><strong id="statRevenue">0€</strong></div>
+      </div>
+      <div class="tabs">
+        <button class="tab active" data-tab="bookingsTab">Prenotazioni</button>
+        <button class="tab" data-tab="carsTab">Auto</button>
+      </div>
+      <section id="bookingsTab" class="panel-card">
+        <div class="table-toolbar">
+          <h3>Prenotazioni</h3>
+          <select id="statusFilter">
+            <option value="all">Tutti</option>
+            <option value="request">Richieste</option>
+            <option value="confirmed">Confermate</option>
+            <option value="active">In corso</option>
+            <option value="completed">Concluse</option>
+            <option value="cancelled">Annullate</option>
+          </select>
+        </div>
+        <div class="table-wrap"><table><thead><tr><th>Codice</th><th>Cliente</th><th>Auto</th><th>Date</th><th>Totale</th><th>Stato</th><th>Azioni</th></tr></thead><tbody id="bookingsTable"></tbody></table></div>
+      </section>
+      <section id="carsTab" class="panel-card hidden">
+        <h3>Auto in flotta</h3>
+        <div id="adminCarsList" class="admin-cars"></div>
+      </section>
+    </section>
+  </main>
+  <script src="config.js"></script>
+  <script type="module" src="js/admin.js"></script>
+</body>
+</html>
