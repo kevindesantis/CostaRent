@@ -35,3 +35,9 @@ img{max-width:100%;display:block}.container{width:min(1120px,92vw);margin:0 auto
 .fixed-location-box span{color:var(--muted);font-size:14px;font-weight:700}
 
 .car-img img{object-fit:contain;padding:10px}
+
+.car-group-label{display:inline-flex;align-self:flex-start;background:#edf4f7;color:var(--navy);border:1px solid var(--border);padding:7px 12px;border-radius:999px;font-weight:800;font-size:14px}
+.car-title-wrap p{margin:8px 0 0;color:var(--muted);font-size:15px}
+.car-card h3{font-size:32px;line-height:1.05;letter-spacing:-.03em}
+.car-img{height:220px;background:linear-gradient(180deg,#f7fbfd 0%,#ffffff 100%);border:1px solid #e7eff3}
+.car-meta span{font-size:14px}
