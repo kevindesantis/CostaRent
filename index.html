@@ -18,7 +18,6 @@
         <a href="#prenota">Prenota</a>
         <a href="#prezzi">Prezzi</a>
         <a href="#faq">FAQ</a>
-        <a class="btn btn-small" href="admin.html">Gestionale</a>
       </div>
     </nav>
   </header>
@@ -29,7 +28,7 @@
         <div class="hero-copy">
           <span class="pill">Autonoleggio smart sulla costa ionica</span>
           <h1>Muoviti libero in Calabria.</h1>
-          <p>Auto moderne, prenotazione online, disponibilità in tempo reale e assistenza diretta. Perfetto per vacanze, lavoro, weekend e spostamenti locali.</p>
+          <p>Auto moderne, prenotazione online, disponibilità in tempo reale e ritiro/riconsegna a Sellia Marina. Perfetto per vacanze, lavoro, weekend e spostamenti locali.</p>
           <div class="hero-actions">
             <a class="btn" href="#prenota">Prenota ora</a>
             <a class="btn btn-ghost" id="whatsappTop" href="#">Scrivici su WhatsApp</a>
@@ -37,14 +36,14 @@
           <div class="trust-row">
             <span>✓ Prezzi chiari</span>
             <span>✓ Auto ibride</span>
-            <span>✓ Gestione digitale</span>
+            <span>✓ Ritiro a Sellia Marina</span>
           </div>
         </div>
         <div class="hero-card">
           <div class="road-card">
             <div class="car-shape">🚗</div>
-            <h3>Da 30€/giorno</h3>
-            <p>Prenotazioni rapide per Panda Hybrid e Lancia/Ypsilon.</p>
+            <h3>Prezzo sul periodo scelto</h3>
+            <p>Scegli date e auto: il totale viene calcolato automaticamente.</p>
           </div>
         </div>
       </div>
@@ -54,7 +53,7 @@
       <div class="section-head">
         <span class="eyebrow">La flotta</span>
         <h2>Auto disponibili</h2>
-        <p>Le auto vengono caricate da Supabase. Puoi modificarle dal gestionale.</p>
+        <p>Seleziona l’auto che preferisci: cliccando su “Prenota questa auto” vai direttamente alla richiesta online.</p>
       </div>
       <div id="carsGrid" class="cars-grid"></div>
       <div id="carsEmpty" class="empty hidden">Configura Supabase o aggiungi auto dal gestionale.</div>
@@ -65,7 +64,7 @@
         <div>
           <span class="eyebrow">Prenotazione online</span>
           <h2>Controlla disponibilità e invia la richiesta</h2>
-          <p>Il sistema controlla le date già occupate su Supabase. Quando invii la richiesta, la prenotazione arriva nel gestionale e parte una mail di notifica.</p>
+          <p>Il sistema controlla le date già occupate. Il ritiro e la riconsegna sono impostati su Sellia Marina, così la richiesta resta semplice e chiara.</p>
           <div class="notice">
             <strong>Modalità richiesta:</strong> la prenotazione resta “in richiesta” finché non la confermi dal gestionale.
           </div>
@@ -101,14 +100,11 @@
             <input id="customerEmail" type="email" autocomplete="email" placeholder="nome@email.it" required />
           </label>
           <div class="two-cols">
-            <label>
-              Luogo ritiro
-              <input id="pickupLocation" type="text" placeholder="Sellia Marina / Catanzaro / Lamezia" />
-            </label>
-            <label>
-              Luogo riconsegna
-              <input id="returnLocation" type="text" placeholder="Uguale al ritiro" />
-            </label>
+            <div class="fixed-location-box">
+              <small>Luogo ritiro e riconsegna</small>
+              <strong>Sellia Marina</strong>
+              <span>Il luogo preciso verrà concordato in fase di conferma.</span>
+            </div>
           </div>
           <label>
             Note
@@ -117,15 +113,15 @@
 
           <div class="quote-box" id="quoteBox">
             <div>
-              <small>Totale stimato</small>
+              <small>Prezzo del periodo</small>
               <strong id="quoteTotal">—</strong>
             </div>
             <div>
-              <small>Giorni</small>
+              <small>Durata noleggio</small>
               <strong id="quoteDays">—</strong>
             </div>
             <div>
-              <small>Cauzione indicativa</small>
+              <small>Cauzione</small>
               <strong id="quoteDeposit">—</strong>
             </div>
           </div>
@@ -138,23 +134,22 @@
 
     <section id="prezzi" class="section container">
       <div class="section-head">
-        <span class="eyebrow">Listino indicativo</span>
-        <h2>Prezzi chiari, senza sorprese</h2>
+        <span class="eyebrow">Prezzo su misura</span>
+        <h2>Vedi il totale prima di inviare la richiesta</h2>
+        <p>Il sito non mostra due listini separati: selezioni auto e date, poi visualizzi subito il prezzo del periodo scelto.</p>
       </div>
       <div class="price-grid">
         <div class="price-card">
-          <h3>Panda Hybrid</h3>
-          <p><strong>40€</strong>/giorno luglio-agosto</p>
-          <p><strong>30€</strong>/giorno altri mesi</p>
+          <h3>1. Scegli l’auto</h3>
+          <p>Panda Hybrid o Lancia/Ypsilon, in base alle tue esigenze.</p>
         </div>
         <div class="price-card highlighted">
-          <h3>Lancia/Ypsilon</h3>
-          <p><strong>45€</strong>/giorno luglio-agosto</p>
-          <p><strong>35€</strong>/giorno altri mesi</p>
+          <h3>2. Seleziona le date</h3>
+          <p>Il sistema calcola automaticamente il prezzo del periodo.</p>
         </div>
         <div class="price-card">
-          <h3>Conferma manuale</h3>
-          <p>La richiesta viene verificata e confermata dal gestionale.</p>
+          <h3>3. Invia richiesta</h3>
+          <p>Ti ricontattiamo per confermare disponibilità, documenti e cauzione.</p>
         </div>
       </div>
     </section>
@@ -166,15 +161,15 @@
       </div>
       <details open>
         <summary>La prenotazione è automatica?</summary>
-        <p>No. Il cliente invia una richiesta. Tu la vedi nel gestionale, la controlli e la confermi.</p>
+        <p>No. Il cliente invia una richiesta. CostaRent la controlla e ti ricontatta per la conferma.</p>
       </details>
       <details>
         <summary>Ricevo una mail quando arriva una richiesta?</summary>
-        <p>Sì, se configuri la Edge Function Supabase con Resend e le variabili email.</p>
+        <p>Sì, così CostaRent può risponderti velocemente.</p>
       </details>
       <details>
         <summary>Come gestisco le auto occupate?</summary>
-        <p>Dal gestionale puoi confermare, annullare o chiudere le prenotazioni. Il sito blocca le date sovrapposte.</p>
+        <p>Il sistema evita sovrapposizioni sulle stesse date e sulla stessa auto.</p>
       </details>
     </section>
   </main>

@@ -1,6 +1,4 @@
-// Copia questo file in config.js e inserisci i dati del tuo progetto Supabase.
-// Non inserire mai qui la SERVICE_ROLE_KEY: va usata solo nelle Edge Functions.
-
+// Copia questo file in config.js e inserisci i dati reali.
 window.COSTARENT_CONFIG = {
   SUPABASE_URL: "https://TUO-PROGETTO.supabase.co",
   SUPABASE_ANON_KEY: "INSERISCI_LA_TUA_ANON_PUBLIC_KEY",

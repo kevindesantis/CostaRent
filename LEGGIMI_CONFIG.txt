@@ -1,0 +1,12 @@
+DOVE TROVARE CONFIG.JS
+
+Il file config.js si trova nella cartella principale del sito, insieme a index.html e admin.html.
+Devi modificare questo file prima di pubblicare:
+
+SUPABASE_URL: URL del progetto Supabase
+SUPABASE_ANON_KEY: chiave anon public di Supabase
+WHATSAPP_NUMBER: tuo numero WhatsApp in formato internazionale, es. 393331234567
+BRAND_EMAIL: email pubblica del sito
+BRAND_PHONE_LABEL: numero mostrato nel footer
+
+Non inserire mai la service_role_key nel sito.

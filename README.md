@@ -1,4 +1,9 @@
-# CostaRent - sito + gestionale Supabase
+# CostaRent
+## Nota importante su config.js
+
+Il file `config.js` si trova nella cartella principale del sito, cioè accanto a `index.html` e `admin.html`. Se non lo vedi, stai probabilmente guardando una cartella diversa o una vecchia versione dello ZIP. In questa versione è presente anche `LEGGIMI_CONFIG.txt`.
+
+ - sito + gestionale Supabase
 
 Versione completa con:
 
@@ -179,3 +184,14 @@ Questo progetto usa RLS Supabase:
 - i clienti possono solo inserire nuove richieste;
 - solo gli admin possono leggere e modificare prenotazioni;
 - la service role key resta nella Edge Function e non nel browser.
+
+
+## Modifiche v6
+
+- La pagina pubblica non mostra più link al gestionale: l'admin resta accessibile solo digitando `/admin.html`.
+- Ritiro e riconsegna sono fissati a **Sellia Marina** e vengono salvati così nella prenotazione.
+- Cliccando su una card auto si va direttamente alla sezione prenotazione con quell'auto selezionata.
+- Il cliente vede il prezzo del periodo scelto nella prenotazione, non due listini separati in homepage.
+- Sono incluse immagini SVG demo per Panda Hybrid e Lancia/Ypsilon in `assets/cars/`.
+
+Se hai già eseguito lo schema SQL, non devi rifare il database. Le immagini funzionano anche senza aggiornare la tabella perché il sito usa immagini fallback in base allo slug dell'auto.
