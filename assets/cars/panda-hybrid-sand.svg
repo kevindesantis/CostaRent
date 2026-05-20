@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-label="Fiat Panda Hybrid chiara - immagine illustrativa">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff8e8"/><stop offset="1" stop-color="#dffbfd"/></linearGradient>
+    <linearGradient id="car" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f5d17a"/><stop offset="1" stop-color="#e3a92d"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="22" stdDeviation="18" flood-color="#6c5017" flood-opacity=".20"/></filter>
+  </defs>
+  <rect width="1200" height="760" rx="42" fill="url(#bg)"/>
+  <path d="M0 436 C180 395 295 445 438 403 C690 328 860 452 1200 360 L1200 760 L0 760Z" fill="#cdeff1"/>
+  <path d="M0 600 C230 550 430 600 620 560 C805 522 1000 582 1200 540 L1200 760 L0 760Z" fill="#f1e3bd"/>
+  <g filter="url(#shadow)" transform="translate(140 235)">
+    <path d="M160 290 L218 161 C240 112 284 83 337 79 L650 55 C713 50 776 76 816 125 L928 262 C960 269 987 291 998 324 L1016 379 C1030 424 996 470 949 470 H137 C87 470 51 424 64 376 L80 325 C91 290 123 290 160 290Z" fill="url(#car)"/>
+    <path d="M282 143 C305 116 329 106 367 103 L638 84 C690 80 733 102 764 140 L841 238 H217 L282 143Z" fill="#2f2c26" opacity=".91"/>
+    <path d="M362 114 L338 238 H579 L588 99 Z" fill="#f7fdff" opacity=".78"/>
+    <path d="M623 98 L619 238 H812 L750 153 C720 113 681 93 623 98Z" fill="#edf9fb" opacity=".76"/>
+    <path d="M137 342 H930" stroke="#ffffff" stroke-opacity=".55" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="250" cy="467" r="86" fill="#2f2c26"/>
+    <circle cx="250" cy="467" r="43" fill="#f8fcfd"/>
+    <circle cx="831" cy="467" r="86" fill="#2f2c26"/>
+    <circle cx="831" cy="467" r="43" fill="#f8fcfd"/>
+    <rect x="890" y="302" width="86" height="31" rx="14" fill="#ffffff" opacity=".88"/>
+    <rect x="83" y="320" width="66" height="26" rx="12" fill="#ffffff" opacity=".9"/>
+  </g>
+  <text x="80" y="110" font-family="Inter, Arial, sans-serif" font-size="42" font-weight="800" fill="#062B3F">Panda Hybrid</text>
+  <text x="82" y="154" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700" fill="#8c6314">Economica • ideale per vacanze brevi</text>
+</svg>
