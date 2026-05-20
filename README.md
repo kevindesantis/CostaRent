@@ -1,51 +1,76 @@
-# CostaRent - sito con prenotazione online demo
+# CostaRent sito + gestionale demo
 
-Questa versione include:
+Questa versione contiene:
 
-- 3 auto configurate: 2 Fiat Panda Hybrid + 1 Lancia/Ypsilon
-- listino automatico: luglio/agosto alta stagione, altri mesi bassa stagione
-- wizard di prenotazione in 4 passaggi
-- controllo disponibilità demo con salvataggio nel browser tramite localStorage
-- riepilogo prezzo automatico
-- invio richiesta su WhatsApp
-- sezione "Demo prenotazioni" per vedere le richieste salvate
+- `index.html`: sito pubblico con flusso prenotazione.
+- `admin.html`: gestionale demo per auto e prenotazioni.
+- `app.js`: logica sito pubblico.
+- `admin.js`: logica gestionale.
+- `styles.css`: grafica unica per sito e admin.
 
-## Come configurare WhatsApp
+## Come provarlo
 
-Apri `script.js` e cambia:
+Apri `index.html` nel browser e prova una prenotazione.
+Poi apri `admin.html`, usa PIN demo `1234`, e vedrai la richiesta salvata.
 
-```js
-const WHATSAPP_NUMBER = "390000000000";
+## Cosa puoi fare nel gestionale
+
+- Aggiungere, modificare o disattivare auto.
+- Cambiare prezzi alta/bassa stagione.
+- Vedere tutte le richieste.
+- Cambiare stato: Richiesta, Confermata, In corso, Conclusa, Annullata.
+- Inserire prenotazioni manuali arrivate da WhatsApp/telefono.
+- Esportare CSV delle prenotazioni.
+- Esportare/importare backup JSON.
+
+## Limite importante
+
+Questa è una demo locale: i dati sono salvati in `localStorage`, cioè nel browser.
+Se un cliente apre il sito dal suo telefono, la prenotazione non comparirà nel tuo browser.
+
+Per renderlo reale bisogna collegarlo a Supabase:
+
+### Tabelle consigliate Supabase
+
+```sql
+create table cars (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  short_name text,
+  plate text,
+  seats int default 4,
+  fuel text,
+  summer_price numeric not null default 0,
+  low_price numeric not null default 0,
+  status text not null default 'active',
+  description text,
+  color_class text,
+  created_at timestamptz default now()
+);
+
+create table bookings (
+  id uuid primary key default gen_random_uuid(),
+  car_id uuid references cars(id),
+  car_name text,
+  name text not null,
+  phone text not null,
+  start_date date not null,
+  end_date date not null,
+  days int not null,
+  total numeric not null,
+  status text not null default 'Richiesta',
+  pickup text,
+  notes text,
+  source text default 'Sito',
+  created_at timestamptz default now()
+);
 ```
 
-con il numero aziendale in formato internazionale senza + e senza spazi.
+### Protezione admin
 
-Esempio:
-
-```js
-const WHATSAPP_NUMBER = "393331234567";
-```
-
-## Come modificare auto e prezzi
-
-Nel file `script.js` trovi l'array:
-
-```js
-const cars = [...]
-```
-
-Per ogni auto puoi modificare:
-
-- `name`
-- `summerPrice`
-- `lowPrice`
-- `description`
-- `fuel`
-
-## Importante
-
-Questa è una simulazione statica. Le prenotazioni salvate restano nel browser del dispositivo. Per avere prenotazioni vere online, accessibili da telefono e computer, serve collegare un database come Supabase.
+Il PIN `1234` è solo una simulazione. Online non è sicuro.
+Per il sito reale serve login vero, per esempio Supabase Auth.
 
 ## Pubblicazione su Vercel
 
-Puoi caricare tutta la cartella su GitHub e importarla in Vercel. Il sito è statico e non richiede build.
+Carica la cartella su GitHub e collega la repository a Vercel. Essendo sito statico, non serve build command.
