@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071E36"/><stop offset=".55" stop-color="#0B5D88"/><stop offset="1" stop-color="#00B7D8"/></linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="970" cy="120" r="180" fill="#fff" opacity=".12"/>
+  <circle cx="150" cy="540" r="220" fill="#fff" opacity=".09"/>
+  <text x="82" y="185" font-family="Arial, sans-serif" font-size="86" font-weight="800" fill="#fff">CostaRent</text>
+  <text x="86" y="255" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#D7F7FF">Autonoleggio smart in Calabria</text>
+  <text x="86" y="330" font-family="Arial, sans-serif" font-size="28" fill="#fff">Prenoti online o su WhatsApp. Ritiri e parti.</text>
+  <path d="M80 470 C220 390, 390 395, 565 465 C725 530, 900 520, 1120 425" fill="none" stroke="#fff" stroke-width="18" stroke-linecap="round" opacity=".75"/>
+  <path d="M630 305h250c45 0 80 25 99 66l24 51h52c21 0 38 17 38 38v45H990a52 52 0 0 1-100 0H730a52 52 0 0 1-100 0H578v-44c0-22 18-40 40-40h32l54-89c13-22 36-27 64-27z" fill="#fff" opacity=".95"/>
+  <circle cx="680" cy="505" r="28" fill="#071E36"/>
+  <circle cx="940" cy="505" r="28" fill="#071E36"/>
+</svg>
