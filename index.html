@@ -3,195 +3,197 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CostaRent | Prenotazione auto online</title>
-  <meta name="description" content="CostaRent: autonoleggio smart sulla costa ionica calabrese. Prenota Panda Hybrid e Lancia/Ypsilon online." />
-  <meta name="theme-color" content="#0B2A4A" />
-  <meta property="og:title" content="CostaRent | Autonoleggio smart in Calabria" />
-  <meta property="og:description" content="Scegli auto, date e invia la richiesta online." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/og-image.svg" />
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <title>CostaRent | Autonoleggio in Calabria</title>
+  <meta name="description" content="CostaRent: autonoleggio smart in Calabria. Panda Hybrid e Lancia/Ypsilon, prenotazione online, assistenza diretta e prezzi chiari." />
+  <link rel="icon" href="assets/favicon.svg" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="site-header" id="top">
-    <a class="brand" href="#top" aria-label="CostaRent home"><img src="assets/logo.svg" alt="CostaRent" /></a>
-    <button class="nav-toggle" id="navToggle" aria-label="Apri menu" aria-expanded="false">☰</button>
-    <nav class="nav" id="nav">
-      <a href="#auto">Auto</a>
-      <a href="#prezzi">Prezzi</a>
-      <a href="#prenota">Prenota</a>
-      <a href="#come-funziona">Come funziona</a>
-      <a href="#faq">FAQ</a>
-      <a href="admin.html" class="nav-cta">Gestionale</a>
+  <header class="site-header">
+    <nav class="nav container">
+      <a class="brand" href="#top" aria-label="CostaRent homepage"><img src="assets/logo.svg" alt="CostaRent" /></a>
+      <button class="nav-toggle" aria-label="Apri menu" id="navToggle">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#auto">Auto</a>
+        <a href="#prenota">Prenota</a>
+        <a href="#prezzi">Prezzi</a>
+        <a href="#faq">FAQ</a>
+        <a class="btn btn-small" href="admin.html">Gestionale</a>
+      </div>
     </nav>
   </header>
 
-  <main>
-    <section class="hero section-pad">
-      <div class="hero-bg"></div>
+  <main id="top">
+    <section class="hero">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <span class="eyebrow">CostaRent · autonoleggio smart</span>
-          <h1>Prenota l’auto online e muoviti libero in Calabria.</h1>
-          <p>Scegli l’auto, seleziona le date e invia una richiesta. CostaRent ti conferma disponibilità, cauzione e condizioni prima della consegna.</p>
+          <span class="pill">Autonoleggio smart sulla costa ionica</span>
+          <h1>Muoviti libero in Calabria.</h1>
+          <p>Auto moderne, prenotazione online, disponibilità in tempo reale e assistenza diretta. Perfetto per vacanze, lavoro, weekend e spostamenti locali.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#prenota">Prenota ora</a>
-            <a class="btn btn-secondary" href="#auto">Vedi le auto</a>
+            <a class="btn" href="#prenota">Prenota ora</a>
+            <a class="btn btn-ghost" id="whatsappTop" href="#">Scrivici su WhatsApp</a>
           </div>
-          <div class="trust-row" aria-label="Punti di forza">
-            <span>Prenotazione rapida</span>
-            <span>Prezzi chiari</span>
-            <span>Gestione digitale</span>
+          <div class="trust-row">
+            <span>✓ Prezzi chiari</span>
+            <span>✓ Auto ibride</span>
+            <span>✓ Gestione digitale</span>
           </div>
         </div>
         <div class="hero-card">
-          <div class="card-glow"></div>
-          <div class="car-illustration" aria-hidden="true"><div class="road"></div><div class="car-shape"><div class="window"></div><div class="wheel wheel-left"></div><div class="wheel wheel-right"></div></div></div>
-          <h2>Da sito a gestionale</h2>
-          <ul class="mini-list">
-            <li>Le auto vengono lette dal gestionale</li>
-            <li>Le richieste si salvano in archivio demo</li>
-            <li>Il calendario blocca le date occupate</li>
-            <li>Puoi confermare o annullare da admin</li>
-          </ul>
+          <div class="road-card">
+            <div class="car-shape">🚗</div>
+            <h3>Da 30€/giorno</h3>
+            <p>Prenotazioni rapide per Panda Hybrid e Lancia/Ypsilon.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="strip">
-      <div class="container strip-grid" id="publicStats">
-        <div><strong>3</strong><span>auto demo</span></div>
-        <div><strong>Online</strong><span>richieste prenotazione</span></div>
-        <div><strong>Admin</strong><span>gestione flotta</span></div>
-        <div><strong>WhatsApp</strong><span>conferma manuale</span></div>
+    <section id="auto" class="section container">
+      <div class="section-head">
+        <span class="eyebrow">La flotta</span>
+        <h2>Auto disponibili</h2>
+        <p>Le auto vengono caricate da Supabase. Puoi modificarle dal gestionale.</p>
       </div>
+      <div id="carsGrid" class="cars-grid"></div>
+      <div id="carsEmpty" class="empty hidden">Configura Supabase o aggiungi auto dal gestionale.</div>
     </section>
 
-    <section class="section-pad" id="auto">
-      <div class="container">
-        <div class="section-head">
-          <span class="eyebrow">Flotta</span>
-          <h2>Auto disponibili.</h2>
-          <p>Le auto, i prezzi e lo stato vengono gestiti dalla pagina <a href="admin.html">Gestionale</a>. Se un’auto è in manutenzione o disattivata, non è prenotabile.</p>
-        </div>
-        <div class="fleet-grid three" id="fleetGrid"></div>
-      </div>
-    </section>
-
-    <section class="section-pad alt" id="prezzi">
-      <div class="container">
-        <div class="section-head">
-          <span class="eyebrow">Prezzi</span>
-          <h2>Calcolo automatico in base al periodo.</h2>
-          <p>Il sistema calcola ogni giorno separatamente: luglio/agosto = alta stagione; altri mesi = bassa stagione. Puoi cambiare listino dal gestionale.</p>
-        </div>
-        <div class="table-wrap prices-wrap">
-          <table class="data-table">
-            <thead><tr><th>Auto</th><th>Alta stagione</th><th>Bassa stagione</th><th>Stato</th></tr></thead>
-            <tbody id="pricesBody"></tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-pad" id="prenota">
-      <div class="container booking-layout">
-        <div class="booking-intro">
+    <section id="prenota" class="section booking-section">
+      <div class="container booking-grid">
+        <div>
           <span class="eyebrow">Prenotazione online</span>
-          <h2>Scegli auto, date e invia la richiesta.</h2>
-          <p>Questa versione è un prototipo funzionante: salva richieste e disponibilità nel browser. Per renderlo reale su più dispositivi, va collegato a Supabase.</p>
-          <div class="notice"><strong>Demo:</strong> le prenotazioni sono condivise tra sito e gestionale solo nello stesso browser. È perfetto per testare il flusso, non ancora per clienti reali.</div>
+          <h2>Controlla disponibilità e invia la richiesta</h2>
+          <p>Il sistema controlla le date già occupate su Supabase. Quando invii la richiesta, la prenotazione arriva nel gestionale e parte una mail di notifica.</p>
+          <div class="notice">
+            <strong>Modalità richiesta:</strong> la prenotazione resta “in richiesta” finché non la confermi dal gestionale.
+          </div>
         </div>
-        <div class="booking-panel">
-          <form class="booking-form" id="bookingForm">
-            <div class="booking-steps">
-              <button class="booking-step active" data-step-target="1" type="button"><span>1</span> Auto</button>
-              <button class="booking-step" data-step-target="2" type="button"><span>2</span> Date</button>
-              <button class="booking-step" data-step-target="3" type="button"><span>3</span> Dati</button>
-              <button class="booking-step" data-step-target="4" type="button"><span>4</span> Invio</button>
-            </div>
 
-            <div class="form-screen active" data-step="1">
-              <h3>1. Scegli l’auto</h3>
-              <div class="car-choice-grid" id="carChoiceGrid"></div>
-            </div>
+        <form id="bookingForm" class="booking-card">
+          <label>
+            Auto
+            <select id="bookingCar" required></select>
+          </label>
+          <div class="two-cols">
+            <label>
+              Ritiro
+              <input id="pickupDate" type="date" required />
+            </label>
+            <label>
+              Riconsegna
+              <input id="returnDate" type="date" required />
+            </label>
+          </div>
+          <div class="two-cols">
+            <label>
+              Nome e cognome
+              <input id="customerName" type="text" autocomplete="name" placeholder="Mario Rossi" required />
+            </label>
+            <label>
+              Telefono
+              <input id="customerPhone" type="tel" autocomplete="tel" placeholder="333 1234567" required />
+            </label>
+          </div>
+          <label>
+            Email
+            <input id="customerEmail" type="email" autocomplete="email" placeholder="nome@email.it" required />
+          </label>
+          <div class="two-cols">
+            <label>
+              Luogo ritiro
+              <input id="pickupLocation" type="text" placeholder="Sellia Marina / Catanzaro / Lamezia" />
+            </label>
+            <label>
+              Luogo riconsegna
+              <input id="returnLocation" type="text" placeholder="Uguale al ritiro" />
+            </label>
+          </div>
+          <label>
+            Note
+            <textarea id="bookingNotes" rows="3" placeholder="Orario indicativo, esigenze particolari, seggiolino, ecc."></textarea>
+          </label>
 
-            <div class="form-screen" data-step="2">
-              <h3>2. Scegli periodo</h3>
-              <div class="form-row">
-                <label>Dal <input type="date" id="startDate" required /></label>
-                <label>Al <input type="date" id="endDate" required /></label>
-              </div>
-              <div class="availability-box" id="availabilityBox">Seleziona auto e date.</div>
+          <div class="quote-box" id="quoteBox">
+            <div>
+              <small>Totale stimato</small>
+              <strong id="quoteTotal">—</strong>
             </div>
+            <div>
+              <small>Giorni</small>
+              <strong id="quoteDays">—</strong>
+            </div>
+            <div>
+              <small>Cauzione indicativa</small>
+              <strong id="quoteDeposit">—</strong>
+            </div>
+          </div>
 
-            <div class="form-screen" data-step="3">
-              <h3>3. Dati cliente</h3>
-              <label>Nome e cognome <input type="text" id="name" placeholder="Es. Mario Rossi" required /></label>
-              <label>Telefono <input type="tel" id="phone" placeholder="Es. 333 000 0000" required /></label>
-              <label>Ritiro/consegna <input type="text" id="pickup" placeholder="Es. Sellia Marina, Catanzaro Lido, stazione..." /></label>
-              <label>Note <textarea id="notes" rows="4" placeholder="Orario, seggiolino, consegna presso B&B..."></textarea></label>
-            </div>
+          <button class="btn btn-full" type="submit" id="bookingSubmit">Invia richiesta</button>
+          <p class="form-msg" id="bookingMessage"></p>
+        </form>
+      </div>
+    </section>
 
-            <div class="form-screen" data-step="4">
-              <h3>4. Riepilogo</h3>
-              <div class="estimate" id="estimate">Completa i passaggi.</div>
-              <div class="summary-card" id="summaryCard"></div>
-              <div class="action-row">
-                <button class="btn btn-secondary" id="saveDemoBooking" type="button">Salva nel gestionale demo</button>
-                <button class="btn btn-primary" type="submit">Invia anche su WhatsApp</button>
-              </div>
-              <p class="form-small">La richiesta diventa prenotazione solo dopo conferma di CostaRent.</p>
-            </div>
-
-            <div class="wizard-buttons">
-              <button class="btn btn-ghost" id="prevStep" type="button">Indietro</button>
-              <button class="btn btn-primary" id="nextStep" type="button">Avanti</button>
-            </div>
-          </form>
+    <section id="prezzi" class="section container">
+      <div class="section-head">
+        <span class="eyebrow">Listino indicativo</span>
+        <h2>Prezzi chiari, senza sorprese</h2>
+      </div>
+      <div class="price-grid">
+        <div class="price-card">
+          <h3>Panda Hybrid</h3>
+          <p><strong>40€</strong>/giorno luglio-agosto</p>
+          <p><strong>30€</strong>/giorno altri mesi</p>
+        </div>
+        <div class="price-card highlighted">
+          <h3>Lancia/Ypsilon</h3>
+          <p><strong>45€</strong>/giorno luglio-agosto</p>
+          <p><strong>35€</strong>/giorno altri mesi</p>
+        </div>
+        <div class="price-card">
+          <h3>Conferma manuale</h3>
+          <p>La richiesta viene verificata e confermata dal gestionale.</p>
         </div>
       </div>
     </section>
 
-    <section class="section-pad alt" id="come-funziona">
-      <div class="container">
-        <div class="section-head"><span class="eyebrow">Flusso operativo</span><h2>Come funziona la prenotazione.</h2></div>
-        <div class="steps-grid">
-          <div class="step"><span>1</span><h3>Richiesta cliente</h3><p>Il cliente seleziona auto e date dal sito.</p></div>
-          <div class="step"><span>2</span><h3>Controllo admin</h3><p>Tu vedi richiesta nel gestionale, controlli patente, cauzione e disponibilità.</p></div>
-          <div class="step"><span>3</span><h3>Conferma</h3><p>Cambi stato in “Confermata” e blocchi l’auto per quelle date.</p></div>
-          <div class="step"><span>4</span><h3>Consegna</h3><p>Passi a “In corso”, poi “Conclusa” quando rientra l’auto.</p></div>
-        </div>
+    <section id="faq" class="section faq container">
+      <div class="section-head">
+        <span class="eyebrow">Domande frequenti</span>
+        <h2>Come funziona</h2>
       </div>
-    </section>
-
-    <section class="section-pad" id="faq">
-      <div class="container faq-wrap">
-        <div class="section-head"><span class="eyebrow">FAQ</span><h2>Domande frequenti.</h2></div>
-        <div class="faq-list">
-          <details open><summary>È già un gestionale vero?</summary><p>È un prototipo locale. Funziona nello stesso browser e serve per vedere il flusso. Per usarlo davvero con clienti va collegato a Supabase o altro database.</p></details>
-          <details><summary>Il cliente può prenotare automaticamente?</summary><p>Per ora no: invia una richiesta. Tu confermi manualmente dal gestionale dopo controllo documenti, cauzione e condizioni.</p></details>
-          <details><summary>Posso modificare prezzi e auto senza toccare codice?</summary><p>Sì, dalla pagina gestionale puoi aggiungere, modificare, disattivare e cancellare auto.</p></details>
-        </div>
-      </div>
-    </section>
-
-    <section class="cta-band" id="contatti">
-      <div class="container cta-grid">
-        <div><h2>Vuoi verificare disponibilità?</h2><p>Compila il modulo o scrivici su WhatsApp.</p></div>
-        <div class="cta-actions"><a class="btn btn-light" href="#prenota">Prenota online</a><a class="btn btn-outline-light" href="#" id="directWhatsapp">WhatsApp</a></div>
-      </div>
+      <details open>
+        <summary>La prenotazione è automatica?</summary>
+        <p>No. Il cliente invia una richiesta. Tu la vedi nel gestionale, la controlli e la confermi.</p>
+      </details>
+      <details>
+        <summary>Ricevo una mail quando arriva una richiesta?</summary>
+        <p>Sì, se configuri la Edge Function Supabase con Resend e le variabili email.</p>
+      </details>
+      <details>
+        <summary>Come gestisco le auto occupate?</summary>
+        <p>Dal gestionale puoi confermare, annullare o chiudere le prenotazioni. Il sito blocca le date sovrapposte.</p>
+      </details>
     </section>
   </main>
 
   <footer class="footer">
     <div class="container footer-grid">
-      <div><img class="footer-logo" src="assets/logo.svg" alt="CostaRent" /><p>Autonoleggio smart sulla costa ionica calabrese.</p></div>
-      <div><h4>Link</h4><a href="#auto">Auto</a><a href="#prezzi">Prezzi</a><a href="#prenota">Prenota</a><a href="admin.html">Gestionale</a></div>
-      <div><h4>Info</h4><p>Dominio: costarent.it</p><p>Numero WhatsApp da configurare.</p><p>© <span id="year"></span> CostaRent</p></div>
+      <div>
+        <img src="assets/logo.svg" alt="CostaRent" />
+        <p>Autonoleggio smart in Calabria.</p>
+      </div>
+      <div>
+        <strong>Contatti</strong>
+        <p id="footerPhone">WhatsApp: —</p>
+        <p id="footerEmail">Email: —</p>
+      </div>
     </div>
   </footer>
-  <script src="app.js"></script>
+
+  <script src="config.js"></script>
+  <script type="module" src="js/public.js"></script>
 </body>
 </html>

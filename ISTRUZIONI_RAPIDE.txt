@@ -1,0 +1,11 @@
+ISTRUZIONI RAPIDE COSTARENT
+
+1) Supabase > SQL Editor > esegui database/schema.sql
+2) Supabase > Authentication > crea utente admin
+3) Supabase > SQL Editor > esegui database/setup_admin.sql con il vero User UID
+4) Modifica config.js con URL Supabase e ANON KEY
+5) Configura Resend e deploy Edge Function notify-booking
+6) Pubblica sito su Vercel
+7) Entra in admin.html e gestisci prenotazioni
+
+Per test locale puoi aprire index.html con VS Code Live Server.
