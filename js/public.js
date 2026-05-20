@@ -4,6 +4,12 @@ let cars = [];
 let selectedCar = null;
 const FIXED_LOCATION = 'Sellia Marina';
 
+const PUBLIC_CAR_PRESETS = [
+  { publicName: 'Fiat Panda o similare', groupLabel: 'Gruppo A', fuelLabel: 'Hybrid', shortType: 'Piccola', image: 'assets/cars/panda-hybrid-blue.svg', fallbackDescription: 'City car economica, agile e perfetta per vacanze, mare e spostamenti locali.' },
+  { publicName: 'Fiat Panda o similare', groupLabel: 'Gruppo A', fuelLabel: 'Hybrid', shortType: 'Piccola', image: 'assets/cars/panda-hybrid-sand.svg', fallbackDescription: 'Seconda city car di Gruppo A, pratica e versatile per muoversi in Calabria con semplicità.' },
+  { publicName: 'Lancia Ypsilon o similare', groupLabel: 'Gruppo B', fuelLabel: 'Benzina', shortType: 'Compatta', image: 'assets/cars/lancia-ypsilon.svg', fallbackDescription: 'Auto di categoria superiore, più comoda per coppie, lavoro e turismo.' }
+];
+
 function getCarImage(car) {
   if (car?.image_url) return car.image_url;
   const slug = String(car?.slug || car?.name || '').toLowerCase();
@@ -16,6 +22,19 @@ function getCarImage(car) {
 function startingText(car) {
   const low = Number(car?.price_low || 0);
   return low ? `Da ${euro(low)}/giorno` : 'Seleziona le date';
+}
+
+function getPublicCarData(car) {
+  const index = Math.max(0, cars.findIndex(c => c.id === car?.id));
+  const preset = PUBLIC_CAR_PRESETS[index] || {};
+  return {
+    publicName: preset.publicName || car?.name || 'Auto o similare',
+    groupLabel: preset.groupLabel || 'Gruppo',
+    fuelLabel: preset.fuelLabel || car?.fuel || 'Benzina',
+    shortType: preset.shortType || car?.category || 'Piccola',
+    image: car?.image_url || preset.image || getCarImage(car),
+    fallbackDescription: preset.fallbackDescription || car?.description || 'Auto comoda e pratica per i tuoi spostamenti.'
+  };
 }
 
 const els = {
@@ -88,22 +107,24 @@ function renderCars() {
   els.carsEmpty.classList.toggle('hidden', cars.length > 0);
   cars.forEach(car => {
     const card = document.createElement('article');
+    const view = getPublicCarData(car);
     card.className = 'car-card';
     card.innerHTML = `
-      <div class="car-img"><img src="${escapeHTML(getCarImage(car))}" alt="${escapeHTML(car.name)}"></div>
-      <div>
-        <h3>${escapeHTML(car.name)}</h3>
-        <p>${escapeHTML(car.description || 'Auto comoda, economica e perfetta per muoversi in Calabria.')}</p>
+      <div class="car-group-label">${escapeHTML(view.groupLabel)}</div>
+      <div class="car-title-wrap">
+        <h3>${escapeHTML(view.publicName)}</h3>
+        <p>${escapeHTML(car.description || view.fallbackDescription)}</p>
       </div>
+      <div class="car-img"><img src="${escapeHTML(view.image)}" alt="${escapeHTML(view.publicName)}"></div>
       <div class="car-meta">
-        <span>${escapeHTML(car.fuel || 'Hybrid')}</span>
+        <span>${escapeHTML(view.shortType)}</span>
         <span>${Number(car.seats || 5)} posti</span>
-        <span>${Number(car.doors || 5)} porte</span>
+        <span>${escapeHTML(view.fuelLabel)}</span>
       </div>
       <div class="car-price single-price">
-        <div><small>Prezzo indicativo</small><br><strong>${startingText(car)}</strong><span>Il totale preciso si vede scegliendo le date.</span></div>
+        <div><small>Prezzo per il tuo periodo</small><br><strong>${startingText(car)}</strong><span>Seleziona le date per vedere il totale esatto.</span></div>
       </div>
-      <button class="btn btn-full" data-car-id="${car.id}">Prenota questa auto</button>
+      <button class="btn btn-full" data-car-id="${car.id}">Paga al ritiro</button>
     `;
     const goToBooking = () => {
       els.bookingCar.value = car.id;
@@ -121,7 +142,10 @@ function renderCars() {
 }
 
 function renderCarOptions() {
-  els.bookingCar.innerHTML = cars.map(car => `<option value="${car.id}">${escapeHTML(car.name)}</option>`).join('');
+  els.bookingCar.innerHTML = cars.map(car => {
+    const view = getPublicCarData(car);
+    return `<option value="${car.id}">${escapeHTML(view.groupLabel)} · ${escapeHTML(view.publicName)}</option>`;
+  }).join('');
   selectedCar = cars[0] || null;
 }
 
@@ -216,13 +240,38 @@ async function checkAvailability(carId, pickupDate, returnDate) {
 
 async function notifyBooking(bookingId) {
   const cfg = getConfig();
+  const functionName = cfg.BOOKING_FUNCTION_NAME || 'notify-booking';
+
+  if (!cfg.SUPABASE_URL || !cfg.SUPABASE_ANON_KEY) {
+    console.warn('Notifica email non inviata: config Supabase mancante.');
+    return false;
+  }
+
+  const endpoint = cfg.SUPABASE_URL.replace(/\/$/, '') + '/functions/v1/' + functionName;
+
   try {
-    const { error } = await supabase.functions.invoke(cfg.BOOKING_FUNCTION_NAME || 'notify-booking', {
-      body: { booking_id: bookingId }
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': cfg.SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + cfg.SUPABASE_ANON_KEY
+      },
+      body: JSON.stringify({ booking_id: bookingId })
     });
-    if (error) console.warn('Notifica email non inviata:', error.message);
+
+    const result = await response.json().catch(() => ({}));
+
+    if (!response.ok || result.error) {
+      console.warn('Notifica email non inviata:', result.error || response.status);
+      return false;
+    }
+
+    console.log('Notifica email inviata:', result);
+    return true;
   } catch (err) {
     console.warn('Notifica email non configurata:', err);
+    return false;
   }
 }
 
@@ -238,8 +287,9 @@ function clearMessage() { showMessage('', ''); }
 
 function renderEmptyDemo() {
   els.carsGrid.innerHTML = `
-    <article class="car-card"><div class="car-img"><img src="assets/cars/panda-hybrid-blue.svg" alt="Fiat Panda Hybrid"></div><h3>Fiat Panda Hybrid</h3><p>Demo visiva. Collega Supabase per usare dati reali.</p></article>
-    <article class="car-card"><div class="car-img"><img src="assets/cars/lancia-ypsilon.svg" alt="Lancia Ypsilon"></div><h3>Lancia/Ypsilon</h3><p>Demo visiva. Collega Supabase per usare dati reali.</p></article>
+    <article class="car-card"><div class="car-group-label">Gruppo A</div><div class="car-img"><img src="assets/cars/panda-hybrid-blue.svg" alt="Fiat Panda o similare"></div><h3>Fiat Panda o similare</h3><p>Demo visiva. Collega Supabase per usare dati reali.</p></article>
+    <article class="car-card"><div class="car-group-label">Gruppo A</div><div class="car-img"><img src="assets/cars/panda-hybrid-sand.svg" alt="Fiat Panda o similare"></div><h3>Fiat Panda o similare</h3><p>Demo visiva. Collega Supabase per usare dati reali.</p></article>
+    <article class="car-card"><div class="car-group-label">Gruppo B</div><div class="car-img"><img src="assets/cars/lancia-ypsilon.svg" alt="Lancia Ypsilon o similare"></div><h3>Lancia Ypsilon o similare</h3><p>Demo visiva. Collega Supabase per usare dati reali.</p></article>
   `;
 }
 
