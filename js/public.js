@@ -2,6 +2,21 @@ import { supabase, isConfigured, getConfig, euro, formatDate, calculateTotal, to
 
 let cars = [];
 let selectedCar = null;
+const FIXED_LOCATION = 'Sellia Marina';
+
+function getCarImage(car) {
+  if (car?.image_url) return car.image_url;
+  const slug = String(car?.slug || car?.name || '').toLowerCase();
+  if (slug.includes('panda') && slug.includes('2')) return 'assets/cars/panda-hybrid-sand.svg';
+  if (slug.includes('panda')) return 'assets/cars/panda-hybrid-blue.svg';
+  if (slug.includes('ypsilon') || slug.includes('lancia')) return 'assets/cars/lancia-ypsilon.svg';
+  return '';
+}
+
+function startingText(car) {
+  const low = Number(car?.price_low || 0);
+  return low ? `Da ${euro(low)}/giorno` : 'Seleziona le date';
+}
 
 const els = {
   carsGrid: document.getElementById('carsGrid'),
@@ -13,8 +28,6 @@ const els = {
   customerName: document.getElementById('customerName'),
   customerPhone: document.getElementById('customerPhone'),
   customerEmail: document.getElementById('customerEmail'),
-  pickupLocation: document.getElementById('pickupLocation'),
-  returnLocation: document.getElementById('returnLocation'),
   bookingNotes: document.getElementById('bookingNotes'),
   quoteTotal: document.getElementById('quoteTotal'),
   quoteDays: document.getElementById('quoteDays'),
@@ -77,7 +90,7 @@ function renderCars() {
     const card = document.createElement('article');
     card.className = 'car-card';
     card.innerHTML = `
-      <div class="car-img">${car.image_url ? `<img src="${escapeHTML(car.image_url)}" alt="${escapeHTML(car.name)}">` : '🚗'}</div>
+      <div class="car-img"><img src="${escapeHTML(getCarImage(car))}" alt="${escapeHTML(car.name)}"></div>
       <div>
         <h3>${escapeHTML(car.name)}</h3>
         <p>${escapeHTML(car.description || 'Auto comoda, economica e perfetta per muoversi in Calabria.')}</p>
@@ -87,16 +100,21 @@ function renderCars() {
         <span>${Number(car.seats || 5)} posti</span>
         <span>${Number(car.doors || 5)} porte</span>
       </div>
-      <div class="car-price">
-        <div><small>Luglio/agosto</small><br><strong>${euro(car.price_high)}</strong></div>
-        <div><small>Altri mesi</small><br><strong>${euro(car.price_low)}</strong></div>
+      <div class="car-price single-price">
+        <div><small>Prezzo indicativo</small><br><strong>${startingText(car)}</strong><span>Il totale preciso si vede scegliendo le date.</span></div>
       </div>
       <button class="btn btn-full" data-car-id="${car.id}">Prenota questa auto</button>
     `;
-    card.querySelector('button').addEventListener('click', () => {
+    const goToBooking = () => {
       els.bookingCar.value = car.id;
       onCarChange();
-      document.getElementById('prenota').scrollIntoView({ behavior: 'smooth' });
+      document.getElementById('prenota').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setTimeout(() => els.pickupDate.focus(), 450);
+    };
+    card.querySelector('button').addEventListener('click', goToBooking);
+    card.addEventListener('click', (event) => {
+      if (event.target.closest('button')) return;
+      goToBooking();
     });
     els.carsGrid.appendChild(card);
   });
@@ -115,7 +133,7 @@ function onCarChange() {
 function updateQuote() {
   selectedCar = cars.find(car => car.id === els.bookingCar.value) || selectedCar;
   const quote = calculateTotal(selectedCar, els.pickupDate.value, els.returnDate.value);
-  els.quoteDays.textContent = quote.days ? `${quote.days}` : '—';
+  els.quoteDays.textContent = quote.days ? `${quote.days} giorni` : '—';
   els.quoteTotal.textContent = quote.total ? euro(quote.total) : '—';
   els.quoteDeposit.textContent = selectedCar?.deposit_amount ? euro(selectedCar.deposit_amount) : '—';
   if (els.pickupDate.value) {
@@ -151,8 +169,8 @@ async function submitBooking(event) {
     customer_phone: els.customerPhone.value.trim(),
     pickup_date: els.pickupDate.value,
     return_date: els.returnDate.value,
-    pickup_location: els.pickupLocation.value.trim() || null,
-    return_location: els.returnLocation.value.trim() || els.pickupLocation.value.trim() || null,
+    pickup_location: FIXED_LOCATION,
+    return_location: FIXED_LOCATION,
     notes: els.bookingNotes.value.trim() || null,
     days: quote.days,
     total_amount: quote.total,
@@ -220,8 +238,8 @@ function clearMessage() { showMessage('', ''); }
 
 function renderEmptyDemo() {
   els.carsGrid.innerHTML = `
-    <article class="car-card"><div class="car-img">🚗</div><h3>Fiat Panda Hybrid</h3><p>Demo visiva. Collega Supabase per usare dati reali.</p></article>
-    <article class="car-card"><div class="car-img">🚙</div><h3>Lancia/Ypsilon</h3><p>Demo visiva. Collega Supabase per usare dati reali.</p></article>
+    <article class="car-card"><div class="car-img"><img src="assets/cars/panda-hybrid-blue.svg" alt="Fiat Panda Hybrid"></div><h3>Fiat Panda Hybrid</h3><p>Demo visiva. Collega Supabase per usare dati reali.</p></article>
+    <article class="car-card"><div class="car-img"><img src="assets/cars/lancia-ypsilon.svg" alt="Lancia Ypsilon"></div><h3>Lancia/Ypsilon</h3><p>Demo visiva. Collega Supabase per usare dati reali.</p></article>
   `;
 }
 
