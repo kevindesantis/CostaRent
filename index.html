@@ -56,9 +56,7 @@
         <h2>Le nostre auto</h2>
         <p>Scopri i gruppi disponibili e scegli quello più adatto alle tue esigenze. La disponibilità viene controllata in base alle date selezionate.</p>
       </div>
-      <div id="carsGrid" class="cars-grid">
-        <div class="loading-card">Caricamento auto...</div>
-      </div>
+      <div id="carsGrid" class="cars-grid"></div>
     </section>
 
     <section id="prenota" class="section booking-section">
@@ -79,6 +77,7 @@
             <select id="bookingGroup" required></select>
           </label>
           <p id="availabilityMessage" class="message info">Seleziona gruppo e date per verificare la disponibilità.</p>
+
           <div class="two">
             <label>Data ritiro
               <input id="pickupDate" type="date" required>
@@ -87,6 +86,7 @@
               <input id="returnDate" type="date" required>
             </label>
           </div>
+
           <div class="two">
             <label>Nome e cognome
               <input id="customerName" type="text" required>
@@ -95,17 +95,21 @@
               <input id="customerPhone" type="tel" required>
             </label>
           </div>
+
           <label>Email
             <input id="customerEmail" type="email" required>
           </label>
+
           <label>Note
             <textarea id="bookingNotes" rows="3" placeholder="Eventuali richieste aggiuntive"></textarea>
           </label>
+
           <div class="quote">
             <div><small>Totale stimato</small><strong id="quoteTotal">—</strong></div>
             <div><small>Durata</small><strong id="quoteDays">—</strong></div>
             <div><small>Cauzione</small><strong id="quoteDeposit">—</strong></div>
           </div>
+
           <button id="bookingSubmit" class="btn full" type="submit">Invia richiesta</button>
           <p id="bookingMessage" class="message"></p>
         </form>
@@ -118,9 +122,9 @@
         <h2>Tre passaggi e hai finito</h2>
       </div>
       <div class="steps">
-        <article><span>1</span><h3>Scegli l’auto</h3><p>Seleziona il gruppo auto e le date del noleggio.</p></article>
-        <article><span>2</span><h3>Invia la richiesta</h3><p>La richiesta viene registrata e collegata a un’auto disponibile del gruppo scelto.</p></article>
-        <article><span>3</span><h3>Ti ricontattiamo</h3><p>Dopo la verifica disponibilità confermiamo il noleggio e organizziamo il ritiro.</p></article>
+        <article><span>1</span><h3>Scegli il gruppo</h3><p>Seleziona il gruppo auto e le date del noleggio.</p></article>
+        <article><span>2</span><h3>Controlla disponibilità</h3><p>Il sistema verifica se almeno una vettura del gruppo scelto è libera.</p></article>
+        <article><span>3</span><h3>Invia la richiesta</h3><p>Registriamo la richiesta e ti ricontattiamo per la conferma.</p></article>
       </div>
     </section>
 
@@ -151,6 +155,7 @@
   </footer>
 
   <script src="config.js"></script>
-  <script type="module" src="js/public.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/public.js"></script>
 </body>
 </html>
